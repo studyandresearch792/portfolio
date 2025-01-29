@@ -1,11 +1,10 @@
-import { Box, Card, CardMedia, Typography } from "@mui/material";
+import { Box, Card, CardMedia } from "@mui/material";
 import mainCv from "../utils/maincv.pdf";
 
 const ResumeComponent = () => {
   return (
-    <Box sx={{ p: 4 ,backgroundColor:"black"}}>
+    <Box sx={{ p: 4, backgroundColor: "black" }}>
       <Card>
-        <Typography variant="h2" sx={{alignContent:"center"}}>Resume</Typography>
         <CardMedia
           component="iframe"
           src={mainCv}

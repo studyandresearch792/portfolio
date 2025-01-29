@@ -19,7 +19,7 @@ const ContactComponent = () => {
     fullName: string,
     contactNo: string
   ) => {
-    const subject = encodeURIComponent("Contact Form Submission");
+    const subject = encodeURIComponent("Internship");
     const body = encodeURIComponent(
       `Full Name: ${fullName}\nContact No: ${contactNo}`
     );

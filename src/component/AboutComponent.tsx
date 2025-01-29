@@ -1,16 +1,11 @@
-import {
-  Box,
-  Container,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 
 import { SkillsImageList } from "../constants/SkillsImageList";
 import ImagelistComponent from "../utils/ImagelistComponent";
 
 import react from "../assets/react.svg";
 import android from "../assets/android.svg";
-import aboutMe from"../assets/aboutme.png";
-
+import aboutMe from "../assets/aboutme.png";
 
 const AboutComponent = () => {
   const skillImageList: SkillsImageList[] = [
@@ -45,7 +40,7 @@ const AboutComponent = () => {
         sx={{
           display: "flex",
           fontFamily: "monospace",
-          fontWeight: "semi-bold",
+          fontWeight: "bold",
           padding: "20px",
           justifyContent: "center",
           color: "goldenrod",
@@ -66,35 +61,25 @@ const AboutComponent = () => {
           sx={{
             color: "orange",
             fontFamily: "sans-serif",
-            fontWeight: "semi-bold",
+            fontWeight: "bold",
+            letterSpacing: "0.1em",
+            lineHeight: "1.6",
+            padding: "20px",
           }}
         >
-          I am a passionate and detail-oriented Android developer with a strong
-          foundation in mobile application development and a keen interest in
-          expanding my skills in web technologies, particularly React.js. Over
-          the past few years, I have honed my abilities in creating intuitive
-          and efficient Android applications, mastering Java, Kotlin, and
-          Android SDK.
+          I’m a skilled Android developer with expertise in Java, Kotlin, and
+          Android SDK. I have experience building user-friendly apps, optimizing
+          performance, and integrating APIs. <br />
           <br />
-          My experience includes developing user-friendly interfaces, optimizing
-          app performance, and integrating third-party APIs. Eager to broaden my
-          expertise, I am currently diving into the world of front-end
-          development with a focus on React.js. My goal is to leverage my mobile
-          development background to build dynamic and responsive web
-          applications.
-          <br /> I am actively learning React.js, JavaScript, and modern web
-          development practices, and I am excited about the prospect of
-          contributing to innovative projects in this domain. I am seeking an
-          internship opportunity where I can apply my existing skills while
-          learning from experienced professionals in the React.js ecosystem. I
-          am committed to continuous learning, collaboration, and delivering
-          high-quality solutions. My proactive approach to problem-solving and
-          passion for technology make me a valuable addition to any development
-          team.
+          Currently, I’m expanding into web development, focusing on React.js,
+          JavaScript, and modern web practices. I’m looking for an internship
+          where I can apply my skills, learn from experts, and contribute to
+          innovative projects. I’m proactive, passionate about technology, and
+          dedicated to delivering quality solutions.
         </Typography>
 
         <img
-          className="flex justify-center items-center h-[300px] w-[500px] "
+          className="flex justify-center items-center h-[300px] w-[600px] "
           srcSet={`${aboutMe}?w=264&h=264&fit=crop&auto=format&dpr=2 2x`}
           src={`${aboutMe}?w=264&h=264&fit=crop&auto=format`}
           alt="About Me"
