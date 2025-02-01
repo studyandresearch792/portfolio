@@ -1,186 +1,213 @@
-import HomeComponent from "./HomeComponent";
-import AboutComponent from "./AboutComponent";
-import ContactComponent from "./ContactComponent";
-import ProjectComponent from "./ProjectComponent";
+import {
+  Box,
+  AppBar,
+  Toolbar,
+  Button,
+  Avatar,
+  Tooltip,
+  CssBaseline,
+  Typography,
+} from "@mui/material";
 
+import mainItems from "../constants/AppbarItems";
+import personalImage from "../assets/personalImage.jpg";
+
+import { NavLink, Outlet } from "react-router";
+import portfolioImage from "/portfolio.png";
 
 // import { SocialMediaImageList } from "../constants/SocialMediaImageList";
 // import { projectItems } from "../constants/ProjectItems";
 // import annapurna from "../assets/Annapurna.jpeg";
 
+import { useScrollTrigger } from "@mui/material";
+import React from "react";
+
+// function MainHome(props: Props) {
+
+//   return (
+//     <>
+//       <ElevationScroll {...props}>
+//         <AppBar position="static">
+//           <Container maxWidth="xl" sx={{ backgroundColor: "black" }}>
+//             <Toolbar disableGutters>
+//               <Avatar
+//                 src={portfolioImage}
+//                 sx={{
+//                   height: "60px",
+//                   width: "60px",
+//                 }}
+//               />
+//               <Box
+//                 sx={{
+//                   flexGrow: 5,
+//                   display: { xs: "none", md: "flex" },
+//                   justifyContent: "center",
+//                 }}
+//               >
+//                 {mainItems.map((page) => (
+//                   <Button
+//                     key={page.path}
+//                     sx={{
+//                       my: 2,
+//                       color: "white",
+//                       display: "block",
+//                       margin: "0 20px",
+//                     }}
+//                   >
+//                     <Typography
+//                       variant="h6"
+//                       onClick={() => setUser(page.title)}
+//                     >
+//                       {page.title}
+//                     </Typography>
+//                   </Button>
+//                 ))}
+//               </Box>
+//               <Box sx={{ flexGrow: 0 }}>
+//                 <Tooltip title="Milan Ghimire">
+//                   <Avatar
+//                     alt="ProfilePic"
+//                     src={personalImage}
+//                     sx={{
+//                       height: "50px",
+//                       width: "50px",
+//                     }}
+//                   />
+//                 </Tooltip>
+//               </Box>
+//             </Toolbar>
+//           </Container>
+//         </AppBar>
+//       </ElevationScroll>
+
+//       <Outlet />
+
+//       <Box sx={{ width: "100%", height: "10%", backgroundColor: "white" }}>
+//         <Container maxWidth="xl" sx={{}}>
+//           hello World
+//         </Container>
+//       </Box>
+//     </>
+//   );
+// }
+
+interface Props {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window?: () => Window;
+  children?: React.ReactElement<{ elevation?: number }>;
+}
+
+function Footer() {
+  return (
+    <footer className="bg-black text-white text-center p-3 absolute bottom-0 w-full ">
+      <p>&copy; 2025 My Website. All rights reserved.</p>
+    </footer>
+  );
+}
+
+const Header = (props: Props) => {
+  return (
+    <Box sx={{ flexGrow: 1, backgroundColor: "black" }}>
+      <CssBaseline />
+      <ElevationScroll {...props}>
+        <AppBar>
+          <Toolbar disableGutters sx={{ backgroundColor: "black" }}>
+            <Avatar
+              src={portfolioImage}
+              sx={{
+                height: "60px",
+                width: "60px",
+              }}
+            />
+            <Box
+              sx={{
+                flexGrow: 5,
+                display: { xs: "none", md: "flex", gap: 50 },
+                justifyContent: "center",
+              }}
+            >
+              {mainItems.map((page) => (
+                <NavLink
+                  key={page.path}
+                  to={page.path}
+                  className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "active" : ""
+                  }
+                  style={({ isActive }) => ({
+                    color: isActive ? "Orange" : "White",
+                  })}
+                >
+                  {
+                    <Typography
+                      sx={{
+                        fontWeight: "bold",
+                        fontFamily: "monospace",
+                        fontSize: "20px",
+                      }}
+                    >
+                      {page.title}
+                    </Typography>
+                  }
+                </NavLink>
+              ))}
+            </Box>
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Milan Ghimire">
+                <Avatar
+                  alt="ProfilePic"
+                  src={personalImage}
+                  sx={{
+                    height: "50px",
+                    width: "50px",
+                  }}
+                />
+              </Tooltip>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </ElevationScroll>
+    </Box>
+  );
+};
+
+function ElevationScroll(props: Props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+
+  return children
+    ? React.cloneElement(children, {
+        elevation: trigger ? 4 : 0,
+      })
+    : null;
+}
+
 function MainHome() {
   return (
-    <>
-      <HomeComponent />
-      <AboutComponent />
-      <ProjectComponent />
-      <ContactComponent />
-    </>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "black",
+        height: "100vh",
+      }}
+    >
+      <Header />
+
+      <Outlet />
+
+      <Footer />
+    </Box>
   );
 }
 
 export default MainHome;
-
-// <div>
-//   <Container
-//     maxWidth="xl"
-//     sx={{
-//       display: "flex",
-//       backgroundColor: "transparent",
-//       height: "100vh",
-//       width: "100%",
-//       backgroundImage: `url(${annapurna})`,
-//       backgroundSize: "cover",
-//       objectFit: "contain",
-//       objectPosition:"center",
-//       backgroundPosition: "center",
-//     }}
-//   >
-//     {/* App Bar View */}
-//     <AppBar
-//       position="static"
-//       sx={{
-//         display: "inline-flex",
-//         flexWrap: "wrap",
-//         width: "100%",
-//         height: "fit-content",
-//         borderRadius: "16px",
-//         marginTop: "10px",
-//         backgroundColor: "transparent",
-//       }}
-//     >
-//       <Box>
-//         <Toolbar disableGutters sx={{ justifyContent: "center" }}>
-//           <Box sx={{ display: "flex", gap: 10 }}>
-//             {mainItems.map((items) => (
-//               <Button sx={{ color: "white", fontWeight: "bold" }}>
-//                 {items.title}
-//               </Button>
-//             ))}
-//           </Box>
-//         </Toolbar>
-//       </Box>
-//     </AppBar>
-
-//     {/* Introduction View */}
-//     <Box
-//       position="absolute"
-//       sx={{
-//         display: "flex-col",
-//         alignSelf: "center",
-//         padding: "10px",
-//         top: "30%",
-//       }}
-//     >
-//       <Typography
-//         variant="h2"
-//         sx={{
-//           fontFamily: "Monospace",
-//           fontWeight: "bold",
-//           fontSize: "50px",
-//           color: "white",
-//         }}
-//       >
-//         Hi,I am
-//         <br />
-//         <span className="text-red-400">Milan Ghimire.</span>
-//         <br />
-//         <h2 className="text-3xl">React Js & Android Developer</h2>
-//       </Typography>
-
-//       {/* Social Media View */}
-
-//       {/* <Box sx={{ display: "inline-flex", gap: 5, marginTop: "2%" }}>
-//         {SocialMediaImageList.map((items) => (
-//           <Card
-//             sx={{
-//               width: 70,
-//               height: 70,
-//               backgroundColor: "transparent",
-//               borderRadius: "50%",
-//               border: "3px solid white",
-//             }}
-//             onClick={() => console.log("clicked")}
-//           >
-//             <CardMedia
-//               component="img"
-//               image={items.icon}
-//               alt="social media icon"
-//               sx={{
-//                 objectFit: "scale-down",
-//                 width: "100%",
-//                 height: "100%",
-//                 display: "flex",
-//                 ":hover": { backgroundColor: "gray", border: "white" },
-//               }}
-//             />
-//           </Card>
-//         ))}
-//       </Box> */}
-//     </Box>
-
-//     {/* Project View */}
-//     {/* {projectItems.map((items) => (
-//       <Box
-//         key={items.title}
-//         position="absolute"
-//         sx={{
-//           display: "flex-col",
-//           justifyContent: "center",
-//           alignItems: "center",
-//           top: "30%",
-//           left: items.left,
-//           width: 200,
-//           height: 200,
-//           borderRadius: "18px",
-//           border: "2px solid white",
-//           boxShadow: "0px 0px 10px 10px transparent",
-//           ":hover": {
-//             border: "1px solid white",
-//             borderRadius: "16px",
-//             boxShadow: "0px 0px 5px 5px white",
-//           },
-//         }}
-//       >
-//         <Card
-//           sx={{
-//             backgroundColor: "transparent",
-//             display: "flex-col",
-//             justifyContent: "center",
-//             alignItems: "center",
-//             flexWrap: "wrap",
-//             width: "100%",
-//             height: "100%",
-//             borderRadius: "16px",
-//           }}
-//         >
-//           <CardMedia
-//             component="img"
-//             image={items.image}
-//             alt="social media icon"
-//             sx={{
-//               width: "100%",
-//               height: "100%",
-//               objectFit: "contain",
-//               justifyContent: "center",
-//               alignItems: "center",
-//               padding: "10px",
-//             }}
-//           />
-//         </Card>
-//         <Typography
-//           variant="h5"
-//           sx={{
-//             display: "flex",
-//             color: "white",
-//             fontWeight:"bold",
-//             justifyContent: "center",
-//             alignItems: "center",
-//           }}
-//         >
-//           {items.title}
-//         </Typography>
-//       </Box>
-//     ))} */}
-//   </Container>
-// </div>

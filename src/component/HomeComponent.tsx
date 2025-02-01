@@ -1,29 +1,27 @@
 import {
   Box,
-  AppBar,
-  Toolbar,
   Button,
-  Avatar,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  TextField,
   Typography,
 } from "@mui/material";
-import mainItems from "../constants/AppbarItems";
-import { NavLink, useNavigate } from "react-router";
-import ImageSlider from "../utils/ImageSlider";
-import personalImage from "../assets/personalImage.jpg";
+import CloseIcon from "@mui/icons-material/Close";
 
-import { useEffect, useState } from "react";
+import ImageSlider from "../utils/ImageSlider";
+import { useState } from "react";
+import { orange, green } from "@mui/material/colors";
 
 const HomeComponent = () => {
-  const navigate = useNavigate();
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [contactNo, setContactNo] = useState("+977");
 
-  const [mainuser, setUser] = useState("");
-
-  useEffect(() => {
-    if (mainuser === "Resume") {
-      navigate("/resume");
-    }
-  }, [mainuser]);
-
+  const [open, setOpen] = useState(false);
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = "maincv.pdf";
@@ -33,57 +31,52 @@ const HomeComponent = () => {
     document.body.removeChild(link);
   };
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    clearState();
+  };
+
+  const clearState = () => {
+    setOpen(false);
+    setFullName("");
+    setEmail("");
+    setContactNo("");
+  };
+
+  const openGmailWithEmail = (
+    emailAddress: string,
+    fullName: string,
+    contactNo: string
+  ) => {
+    const subject = encodeURIComponent("Internship");
+    const body = encodeURIComponent(
+      `Full Name: ${fullName}\nContact No: +977  ${contactNo}`
+    );
+    const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${subject}&body=${body}`;
+
+    window.open(mailtoLink, "_blank");
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log("Full Name:", fullName);
+    console.log("Email:", email);
+    console.log("Contact No:", contactNo);
+    clearState();
+    openGmailWithEmail(email, fullName, contactNo);
+  };
+
   return (
-    <Box sx={{ display: "flex", backgroundColor: "black", height: "100svh" }}>
-      <AppBar
-        position="static"
-        sx={{
-          display: "flex",
-          backgroundColor: "transparent",
-          flexWrap: "wrap",
-          height: "fit-content",
-          justifyContent: "center",
-          alignItems: "flex-end",
-        }}
-      >
-        <Toolbar
-          disableGutters
-          sx={{ justifyContent: "center", marginRight: "30px" }}
-        >
-          <Box sx={{ display: "flex", gap: 10 }}>
-            {mainItems.map((items) => (
-              <Button
-                key={items.title}
-                sx={{ color: "white", fontWeight: "bold" }}
-                onClick={() => {
-                  if (items.title === "Resume") {
-                    setUser("Resume");
-                  }
-                }}
-              >
-                {items.title}
-              </Button>
-            ))}
-            <Avatar
-              alt="Milan Ghimire"
-              src={personalImage}
-              sx={{
-                objectFit: "contain",
-                height: "50px",
-                width: "50px",
-                border: "2px solid white",
-              }}
-            />
-          </Box>
-        </Toolbar>
-      </AppBar>
+    <>
       <Box
         position={"absolute"}
         sx={{
           height: "100%",
           width: "40%",
           backgroundColor: "orange",
-          justifycontent: "flex-start",
           alignItems: "center",
         }}
       >
@@ -97,6 +90,7 @@ const HomeComponent = () => {
           flexWrap: "wrap",
           top: "30%",
           right: "1%",
+          backgroundColor: "black",
         }}
       >
         <Typography variant="h3" sx={{ color: "white", fontWeight: "bold" }}>
@@ -106,31 +100,126 @@ const HomeComponent = () => {
           <br />
           <span>React Js and Android Developer</span>
         </Typography>
-        <NavLink to="about">
-          <Button
+
+        <Button
+          sx={{
+            marginTop: "40px",
+            border: "2px solid orange",
+            ":hover": {
+              backgroundColor: "white",
+              border: "white",
+              color: "black",
+            },
+          }}
+          onClick={() => {
+            handleClickOpen();
+          }}
+        >
+          <Typography
+            variant="h6"
             sx={{
-              marginTop: "40px",
-              border: "2px solid orange",
-              ":hover": {
-                backgroundColor: "white",
-                border: "white",
-                textcolor: "black",
-              },
+              fontFamily: "monospace",
+              fontWeight: "semi-bold",
+              color: "goldenrod",
+              ":hover": { color: "black", fontWeight: "bold" },
             }}
           >
-            <Typography
-              variant="h6"
-              sx={{
-                fontFamily: "monospace",
-                fontWeight: "semi-bold",
-                color: "goldenrod",
-                ":hover": { color: "black", fontWeight: "bold" },
-              }}
-            >
-              Contact Me
-            </Typography>
-          </Button>
-        </NavLink>
+            Contact Me
+          </Typography>
+        </Button>
+
+        <Dialog
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
+        >
+          <DialogTitle
+            sx={{
+              m: 0,
+              p: 2,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            id="customized-dialog-title"
+          >
+            Contact Form
+          </DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleClose}
+            sx={(theme) => ({
+              position: "absolute",
+              right: 8,
+              top: 8,
+              color: theme.palette.grey[500],
+            })}
+          >
+            <CloseIcon />
+          </IconButton>
+
+          <Container
+            maxWidth="sm"
+            sx={{ backgroundColor: "white", padding: 4, borderRadius: 2 }}
+          >
+            <form onSubmit={handleSubmit}>
+              <TextField
+                label="Full Name"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                required
+              />
+              <TextField
+                label="Email"
+                type="email"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <TextField
+                label="Contact No"
+                type="tel"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={contactNo}
+                onChange={(e) =>
+                  setContactNo(e.target.value.replace(/\D/g, ""))
+                }
+                required
+                sx={{
+                  fieldset: {
+                    borderColor: orange,
+                  },
+                  focused: {
+                    borderColor: green[100],
+                  },
+                  input: {
+                    color: "black",
+                  },
+                  "&:hover": {
+                    borderColor: "black",
+                  },
+                }}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+                sx={{ padding: "2%", marginTop: "2%" }}
+              >
+                Submit
+              </Button>
+            </form>
+          </Container>
+        </Dialog>
 
         <Button
           sx={{
@@ -160,7 +249,7 @@ const HomeComponent = () => {
           </Typography>
         </Button>
       </Box>
-    </Box>
+    </>
   );
 };
 

@@ -3,13 +3,21 @@ import mainCv from "../utils/maincv.pdf";
 
 const ResumeComponent = () => {
   return (
-    <Box sx={{ p: 4, backgroundColor: "black" }}>
-      <Card>
+    <Box sx={{ backgroundColor: "black", height: "auto", width: "auto" }}>
+      <Card
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "90vh",
+          width: "100vw",
+        }}
+      >
         <CardMedia
           component="iframe"
           src={mainCv}
           title="Resume"
-          sx={{ height: "100vh" }}
+          sx={{ height: "100%", width: "100%" }}
         />
       </Card>
     </Box>

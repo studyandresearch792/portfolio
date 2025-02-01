@@ -33,31 +33,16 @@ const AboutComponent = () => {
   return (
     <Container
       maxWidth="xl"
-      sx={{ maxHeight: "100%", backgroundColor: "black" }}
+      sx={{ height: "100vh", backgroundColor: "black" }}
     >
-      <Typography
-        variant="h4"
-        sx={{
-          display: "flex",
-          fontFamily: "monospace",
-          fontWeight: "bold",
-          padding: "20px",
-          justifyContent: "center",
-          color: "goldenrod",
-        }}
-      >
-        About me
-      </Typography>
-
       <Box
         sx={{
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         <Typography
-          variant="h6"
           sx={{
             color: "orange",
             fontFamily: "sans-serif",
@@ -65,6 +50,7 @@ const AboutComponent = () => {
             letterSpacing: "0.1em",
             lineHeight: "1.6",
             padding: "20px",
+            fontSize:"15px"
           }}
         >
           I’m a skilled Android developer with expertise in Java, Kotlin, and
