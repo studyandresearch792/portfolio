@@ -1,41 +1,50 @@
-import { Box, Typography } from "@mui/material";
-const ImagelistComponent = ({ name,imageList }: {name:string, imageList: Array<{ name: string; image: string }> }) => {
-
-    
+import { Box, Typography, Container } from "@mui/material";
+const ImagelistComponent = ({
+  name,
+  imageList,
+}: {
+  name: string;
+  imageList: Array<{ name: string; image: string }>;
+}) => {
   return (
-    <Box sx={{ display: "flex-col",padding:"20px"}}>
+    <Container
+      maxWidth="xl"
+      sx={{ display: "flex", marginBottom: "2%", marginTop: "2%" }}
+    >
       <Typography
         sx={{
           display: "flex",
-          color: "white",
-          justifyContent: "center",
+          color: "orange",
+          justifyContent: "flex-start",
           alignItems: "center",
-          paddingBottom:"20px"
+          fontSize: "18px",
+          fontWeight: "bold",
         }}
       >
-        {name}
+        {name} :
       </Typography>
       <Box
         sx={{
           display: "flex",
-          gap: "10px",
-          justifyContent: "center",
-          alignItems: "center",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
         }}
       >
-        {imageList.map((item) => (
-          <img
-            className="flex justify-center items-center h-[100px] w-[100px] border-2 border-orange-500 p-1 rounded-2xl "
-            key={item.name}
-            srcSet={`${item.image}?w=264&h=264&fit=crop&auto=format&dpr=2 2x`}
-            src={`${item.image}?w=264&h=264&fit=crop&auto=format`}
-            alt={item.name}
-            loading="lazy"
-          />
-        ))}
+        <Box sx={{ display: "flex", gap: "40px", marginLeft: "2%" }}>
+          {imageList.map((item) => (
+            <img
+              className="flex justify-center items-center h-[100px] w-[110px] p-1 rounded-2xl "
+              key={item.name}
+              srcSet={`${item.image}?w=200&h=200&fit=crop&auto=format&dpr=2 2x`}
+              src={`${item.image}?w=200&h=200&fit=crop&auto=format`}
+              alt={item.name}
+              loading="lazy"
+            />
+          ))}
+        </Box>
       </Box>
-    </Box>
+    </Container>
   );
 };
 
-export default ImagelistComponent
+export default ImagelistComponent;

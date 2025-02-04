@@ -1,16 +1,15 @@
-import { Box, Card, CardMedia } from "@mui/material";
+import { Card, CardMedia, Container } from "@mui/material";
 import mainCv from "../utils/maincv.pdf";
 
 const ResumeComponent = () => {
   return (
-    <Box sx={{ backgroundColor: "black", height: "auto", width: "auto" }}>
+    <Container maxWidth="xl" sx={{ height: "100%", marginTop: "4%",backgroundColor:"black" }}>
       <Card
         sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "90vh",
-          width: "100vw",
+          height: "100%",
         }}
       >
         <CardMedia
@@ -20,7 +19,7 @@ const ResumeComponent = () => {
           sx={{ height: "100%", width: "100%" }}
         />
       </Card>
-    </Box>
+    </Container>
   );
 };
 

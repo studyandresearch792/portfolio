@@ -3,7 +3,7 @@ import { Box, Card, CardContent, Container, Typography } from "@mui/material";
 
 import remittance from "../assets/projectAssets/Remittance.png";
 import merodoctor from "../assets/projectAssets/MeroDoctor.png";
-import eclass from "../assets/projectAssets/E-class.png";
+import eclass from "../assets/projectAssets/EClass.png";
 
 const images = [
   merodoctor,
