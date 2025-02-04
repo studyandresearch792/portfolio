@@ -47,7 +47,7 @@ const ImageSlider = () => {
         <Box
           sx={{
             display: "flex",
-            marginTop: "50px",
+            marginTop: "40px",
             height: "300px",
             width: "300px",
             flexWrap: "wrap",
