@@ -50,9 +50,9 @@ const HomeComponent = () => {
   ) => {
     const subject = encodeURIComponent("Internship");
     const body = encodeURIComponent(
-      `Full Name: ${fullName}\nContact No: +977  ${contactNo}`
+      `Full Name: ${fullName}\nContact No: +977  ${contactNo}\n From:${email}`
     );
-    const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${subject}&body=${body}`;
+    const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=ghimiremilan622@gmail.com&su=${subject}&body=${body}`;
 
     window.open(mailtoLink, "_blank");
   };
