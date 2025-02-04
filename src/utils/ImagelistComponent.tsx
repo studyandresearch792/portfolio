@@ -33,7 +33,7 @@ const ImagelistComponent = ({
         <Box sx={{ display: "flex", gap: "40px", marginLeft: "2%" }}>
           {imageList.map((item) => (
             <img
-              className="flex justify-center items-center h-[100px] w-[110px] p-1 rounded-2xl "
+              className="flex justify-center items-center object-contain h-[90px] w-[120px]"
               key={item.name}
               srcSet={`${item.image}?w=200&h=200&fit=crop&auto=format&dpr=2 2x`}
               src={`${item.image}?w=200&h=200&fit=crop&auto=format`}
